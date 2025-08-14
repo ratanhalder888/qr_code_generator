@@ -10,10 +10,8 @@
 <body>
     <nav>
         <li><a href="{% url 'home' %}" >Home</a></li>
-        {% comment %}
         <li><a href="{% url 'generate_qr' %}" >Generate QR</a></li>
-        <li><a href="{% url 'scan_qr' %}" >Scan QR</a> 
-        {% endcomment %}
+        <li><a href="{% url 'scan_qr' %}" >Scan QR</a></li>
     </nav>
     <h1 class="main-heading">GS petrol Pump Payment</h1>
     {% block content %}{% endblock content %}
