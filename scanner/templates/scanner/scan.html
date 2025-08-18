@@ -13,7 +13,44 @@
                 id="qr-input">
                 <button type="submit">Scan</button>
             </form>
+            <!-- show uploaded image preview and result -->
+             <div class="qr-preview">
+                {% if qr_image_url %}
+                    <img src="{{ qr_image_url }}" alt="QR Code Image">
+                {% endif %}
+                <h2>{{ result }}</h2>
+             </div>
     </div>
 </div>
+
+<script>
+    // Preview the uploaded QR code image before submitting 
+    const qrInput = document.getElementById('qr-input');
+    qrInput.addEventListener('change', function(event){
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'QR Code Preview';
+                img.style.maxWidth = '200px';
+                img.style.marginLeft = '20px';
+                img.style.border = '1px solid #ddd';
+                img.style.borderRadius = '8px';
+                img.style.padding = '5px';
+
+                // Replace or add the preview image
+                const previewContainer = document.querySelector('.qr-preview');
+                if (previewContainer.querySelector('img')) {
+                    previewContainer.querySelector('img').remove();
+                }
+                previewContainer.prepend(img);
+
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 
 {% endblock content %}
